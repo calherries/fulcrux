@@ -1,3 +1,5 @@
+# A repository for Fulcro + Crux experiments
+
 # Prerequisites
 
 This template utilizes GNU Make 4.x. You'll need to install it first 
