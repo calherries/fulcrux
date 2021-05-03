@@ -15,8 +15,7 @@ endif
 .RECIPEPREFIX = >
 
 shadow-server:
-> yarn
-> yarn shadow-cljs server -A:guardrails
+> npx shadow-cljs server -A:guardrails
 
 fe:
 > bash ./scripts/start_dev.sh
@@ -24,22 +23,22 @@ fe:
 prod-build: fe-release be-release
 
 shadow-report:
-> yarn shadow-cljs run shadow.cljs.build-report $(fe-module) fe-bundle-report.html
+> npx shadow-cljs run shadow.cljs.build-report $(fe-module) fe-bundle-report.html
 
 watch-$(fe-module):
-> yarn shadow-cljs watch :$(fe-module)
+> npx shadow-cljs watch :$(fe-module)
 
 watch: watch-$(fe-module)
 watch-workspaces:
-> yarn shadow-cljs watch :workspaces
+> npx shadow-cljs watch :workspaces
 watch-devcards:
-> yarn shadow-cljs watch :devcards
+> npx shadow-cljs watch :devcards
 watch-client-test:
-> yarn shadow-cljs watch :test
+> npx shadow-cljs watch :test
 
 fe-test:
-> yarn shadow-cljs compile ci-tests
-> yarn karma start --single-run
+> npx shadow-cljs compile ci-tests
+> npx karma start --single-run
 > clj -A:dev:clj-tests
 watch-all: watch-$(fe-module)watch-workspaceswatch-client-test
 

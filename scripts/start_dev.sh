@@ -27,8 +27,8 @@ write_prn_file() {
 main() {
   write_prn_file
 
-  echo yarn install
-  yarn install
+  echo npm install
+  npm install
 
   echo '
   Greetings. I trust you will have an excellent day.
@@ -56,7 +56,7 @@ main() {
  http://localhost:8023
 '
 
-  yarn run shadow-cljs watch main test devcards workspaces
+  npx run shadow-cljs watch main test devcards workspaces
 }
 
 main "$@"
