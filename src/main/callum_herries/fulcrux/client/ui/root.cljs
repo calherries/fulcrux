@@ -49,4 +49,4 @@
 (defsc Root [this {:root/keys [page-container]}]
   {:query         [{:root/page-container (c/get-query PageContainer)}]
    :initial-state (fn [_] {:root/page-container (c/get-initial-state PageContainer {})})}
-  (ui-page-container page-container)
+  (ui-page-container page-container))
