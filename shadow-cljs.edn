@@ -1,0 +1,63 @@
+{:deps
+ {:aliases [:dev]}
+
+ :builds
+ {:main        {:target            :browser
+                :output-dir        "resources/public/js/main"
+                :asset-path        "/js/main"
+                :module-hash-names true
+                :modules           {:main {:init-fn callum-herries.fulcrux.client.client-entry/init
+                                           :entries [callum-herries.fulcrux.client.client-entry]}}
+                ;; guardrails checks only during dev
+                :dev               {:compiler-options {:external-config {:guardrails {}
+                                                                         :fulcro     {:wrap-inputs? false}}}
+                                    :closure-defines  {
+                                                       callum-herries.fulcrux.client.application/LOG-RESPONSES true
+                                                       callum-herries.fulcrux.client.client-entry/LOG_LEVEL    "debug"}}
+                :devtools          {:after-load callum-herries.fulcrux.client.client-entry/refresh
+                                    :preloads   [;; if using the chrome extension:
+                                                 com.fulcrologic.fulcro.inspect.preload
+
+                                                 ;; if using the electron app:
+                                                 ;com.fulcrologic.fulcro.inspect.websocket-preload
+
+                                                 callum-herries.fulcrux.client.development-preload
+                                                 com.fulcrologic.fulcro.inspect.dom-picker-preload]
+}}
+  :test        {:target           :browser-test
+                :test-dir         "resources/public/js/test"
+                :ns-regexp        "-test$"
+                ;; static required for mocking to work
+                :compiler-options {:static-fns      false
+                                   :external-config {:guardrails {}}}
+                :devtools         {:http-port          8022
+                                   :http-resource-root "public"
+                                   :http-root          "resources/public/js/test"}}
+
+  :ci-tests    {:target           :karma
+                :js-options       {:js-provider :shadow}
+                :compiler-options {:static-fns false} ; required for mocking to work
+                :output-to        "target/ci.js"
+                :ns-regexp        "-test$"}
+     :devcards {:target     :browser
+                :output-dir "resources/public/devcards/js"
+                :asset-path "/js"
+
+                :modules    {:devcards {:entries [callum-herries.fulcrux.devcards]
+                                        :init-fn callum-herries.fulcrux.devcards/main}}
+
+                :devtools   {:http-port        4001
+                             :http-root        "resources/public/devcards"
+                             :push-state/index "devcards.html"
+                             :after-load       callum-herries.fulcrux.devcards/main}
+                :compiler-options {:devcards true}}
+  :workspaces  {:target     :browser
+                :modules    {:workspaces {:entries [callum-herries.fulcrux.main-ws]
+                                          :init-fn callum-herries.fulcrux.main-ws/main}}
+                ;:ns-regexp  "-(test|ws)$"
+                :output-dir "resources/public/workspaces/js"
+                :asset-path "/js"
+                :devtools   {
+                             :http-root          "resources/public/workspaces"
+                             :push-state/index   "workspaces.html"
+                             :http-port          8023}}}}

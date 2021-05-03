@@ -1,0 +1,13 @@
+{:io.pedestal.http/config
+ {:io.pedestal.http/port            :env.edn/PORT
+  :io.pedestal.http/allowed-origins ["localhost"]}
+
+ :callum-herries.fulcrux.server.crux-node/config
+ {:db-spec {:dbname   "mydb"
+            :host     "my-db-hostname.com"
+            :port     44444
+            :user     "myuser"
+            :password :env.edn/DB_PASSWORD}}
+
+ :taoensso.timbre/logging-config
+ {:level :info}}

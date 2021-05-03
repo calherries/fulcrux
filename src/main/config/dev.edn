@@ -1,0 +1,17 @@
+{:env :dev
+ :taoensso.timbre/logging-config
+   {:level        :debug
+    :ns-blacklist ["shadow.cljs.devtools.server.worker.impl"]}
+
+ :io.pedestal.http/config
+ {:env :dev
+  :io.pedestal.http/join? false}
+
+ :callum-herries.fulcrux.server.pathom-parser/config
+   {:connect-viz?    true
+    :index-explorer? true
+    :trace?          true
+    :log-responses?  true}
+
+ :callum-herries.fulcrux.server.service/config
+   {:dev? true}}
