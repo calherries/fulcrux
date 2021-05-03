@@ -6,13 +6,9 @@
     [com.fulcrologic.fulcro.routing.dynamic-routing :as dr]
     [com.fulcrologic.fulcro.ui-state-machines :as sm]
     [dv.fulcro-reitit :as fr]
-    ;; [dv.cljs-emotion-reagent :refer [global-style theme-provider]]
     [callum-herries.fulcrux.client.ui.task-item :refer [ui-task-list TaskList TaskForm ui-task-form]]
     [callum-herries.fulcrux.client.application :refer [SPA]]
     [callum-herries.fulcrux.client.ui.task-page :refer [TaskPage]]
-    ;; [callum-herries.fulcrux.client.ui.styles.app-styles :as styles]
-    ;; [callum-herries.fulcrux.client.ui.styles.global-styles :refer [global-styles]]
-    ;; [callum-herries.fulcrux.client.ui.styles.style-themes :as themes]
     [callum-herries.fulcrux.auth.login :refer [ui-login Login Session session-join valid-session?]]
     [callum-herries.fulcrux.auth.signup :refer [Signup]]
     [taoensso.timbre :as log]))
@@ -54,8 +50,3 @@
   {:query         [{:root/page-container (c/get-query PageContainer)}]
    :initial-state (fn [_] {:root/page-container (c/get-initial-state PageContainer {})})}
   (ui-page-container page-container)
-  #_(theme-provider
-    {:theme style-theme}
-    (global-style (global-styles style-theme))
-    [:button {:on-click #(styles/toggle-app-styles! this style-theme)} "Switch Theme"]
-    (ui-page-container page-container)))

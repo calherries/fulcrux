@@ -69,3 +69,6 @@
 (defstate crux-node
   :start (start-node config)
   :stop (.close crux-node))
+
+(comment
+  crux-node)
