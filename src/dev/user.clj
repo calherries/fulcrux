@@ -46,3 +46,7 @@
   (shadow/repl :main)
   (stop)
   (restart))
+
+(comment
+  (mount/find-all-states)
+  )
